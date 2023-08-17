@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #beige;
+            background-image: url('https://r4.wallpaperflare.com/wallpaper/148/392/948/1920x1080-px-books-interior-design-interiors-knowledge-library-shelves-anime-pokemon-hd-art-wallpaper-f970182d511a9d8b26e7588f7021a6cd.jpg');
+            background-size: cover;
+            background-blend-mode: overlay;
+            color: white;
+        }
+        h1 {
+            padding-top: 50px;
+            margin-bottom: 30px;
+        }
+        form {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #34495e;
+        }
+        #qrCodeContainer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        #qrCode {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <form id="qrForm">
+        <label for="title">Book Title:</label>
+        <input type="text" id="title" required>
+        
+        <label for="author">Author Name:</label>
+        <input type="text" id="author" required>
+        
+        <label for="year">Year of Publication:</label>
+        <input type="number" id="year" required>
+        
+        <button type="button" onclick="generateQRCode()">Generate QR Code</button>
+    </form>
+    
+    <div id="qrCodeContainer">
+        <h2>Generated QR Code:</h2>
+        <img id="qrCode" alt="QR Code">
+    </div>
+    
+    <script>
+        function generateQRCode() {
+            var title = document.getElementById("title").value;
+            var author = document.getElementById("author").value;
+            var year = document.getElementById("year").value;
+            var data = `Title: ${title}\nAuthor: ${author}\nYear: ${year}`;
+            
+            var qrCodeContainer = document.getElementById("qrCodeContainer");
+            var qrCodeImg = document.getElementById("qrCode");
+            
+            qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(data)}&size=200x200`;
+            qrCodeContainer.style.display = "block";
+        }
+    </script>
+</body>
+</html>
